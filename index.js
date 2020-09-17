@@ -91,12 +91,16 @@ class Car {
     this.tank = (this.tank + gallons);
   }
   drive(distance) {
-    this.odometer = (this.odometer + distance)
-    
+    this.odometer = (this.odometer + distance);
+    if (this.tank === (distance / this.milesPerGallon)) {
+      return this.tank = (this.tank - (distance / this.milesPerGallon));
+    } else {
+      return this.tank = 0
+    }
   }
 }
 
-
+// this.tank = (this.tank - (distance / this.milesPerGallon));
 
 
 
@@ -116,10 +120,21 @@ class Car {
 
 
 class Lambdasian {
-
+  constructor(attributes) {
+    this.name = attributes.name;
+    this.age = attributes.age;
+    this.location = attributes.location;
+  }
+  speak() {
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
 }
 
-
+const human = new Lambdasian({
+  name: 'Rees',
+  age: 20,
+  location: 'Cleveland'
+});
 
 
 
