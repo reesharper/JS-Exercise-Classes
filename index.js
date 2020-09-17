@@ -42,20 +42,20 @@ class Airplane {
 
 
 class Person {
-  constructor(name, age){
+  constructor(name, age) {
     this.name = name;
     this.age = age;
     this.stomach = [];
   }
-  eat(edible){
-    if(this.stomach.length < 10){
+  eat(edible) {
+    if (this.stomach.length < 10) {
       this.stomach.push(edible)
     }
   }
-  poop(){
+  poop() {
     this.stomach = []
   }
-  toString(){
+  toString() {
     return `${this.name}, ${this.age}`;
   }
 }
@@ -91,17 +91,17 @@ class Car {
     this.tank = (this.tank + gallons);
   }
   drive(distance) {
-    this.odometer = (this.odometer + distance);
-    if (this.tank === (distance / this.milesPerGallon)) {
-      return this.tank = (this.tank - (distance / this.milesPerGallon));
+    if (this.tank >= (distance / this.milesPerGallon)) {
+      this.odometer = (this.odometer + distance);
+      this.tank = this.tank - (distance / this.milesPerGallon);
+      return this.tank;
     } else {
-      return this.tank = 0
+      this.odometer += this.milesPerGallon * this.tank;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles`;
     }
   }
 }
-
-// this.tank = (this.tank - (distance / this.milesPerGallon));
-
 
 
 
@@ -155,8 +155,19 @@ const human = new Lambdasian({
 */
 
 
-class Instructor {
-
+class Instructor extends Lambdasian {
+  constructor(attributes) {
+    super(attributes);
+    this.specialty = attributes.specialty;
+    this.favLanguage = attributes.favLanguage;
+    this.catchPhrase = attributes.catchPhrase;
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}`;
+  }
+  grade(student, subject) {
+    return `${student.name} recieves a perfect score on ${subject}`;
+  }
 }
 
 
@@ -182,8 +193,22 @@ class Instructor {
 */
 
 
-class Student {
-
+class Student extends Lambdasian {
+  constructor(attributes) {
+    super(attributes)
+    this.previousBackground = attributes.previousBackground;
+    this.className = attributes.className;
+    this.favSubjects = attributes.favSubjects;
+  }
+  listSubjects(){
+    return `Loving ${this.favSubjects}!`
+  }
+  PRAssignment(subject) {
+    return `${this.name} has submited a PR for ${subject}`
+  }
+  sprintChallenge(subject) {
+    return `${this.name} has begun the sprint challenge on ${subject}`
+  }
 }
 
 
